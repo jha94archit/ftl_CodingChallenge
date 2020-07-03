@@ -9,7 +9,7 @@ class Member(models.Model):
 
 
 class ActivityPeriods(models.Model):
-    #  Activity period model for user activity date and time
+    """Activity period model for user activity date and time"""
     member_id = models.ForeignKey(Member, on_delete=models.CASCADE, related_name='activity_periods')
     start_time = models.DateTimeField()
     end_time = models.DateTimeField()

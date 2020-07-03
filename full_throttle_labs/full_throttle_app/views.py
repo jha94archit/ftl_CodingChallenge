@@ -6,9 +6,8 @@ from rest_framework import generics
 import json
 
 
-
 class MemberActivityView(APIView):
-
+    """ View to check if data in db and list member and activity details """
     def get(self, request):
         queryset = Member.objects.all()
         if queryset:
@@ -25,12 +24,3 @@ class MemberActivityView(APIView):
                 "ok": False
             })
 
-
-class MemberActivity(generics.ListAPIView):
-    queryset = Member.objects.all()
-    serializer_class = MemberSerializer
-
-
-class ActivityView(generics.ListAPIView):
-    queryset = ActivityPeriods.objects.all()
-    serializer_class = ActivityPeriodsSerializer
