@@ -9,18 +9,19 @@ import json
 class MemberActivityView(APIView):
     """ View to check if data in db and list member and activity details """
     def get(self, request):
-        queryset = Member.objects.all()
-        if queryset:
-            serializer_class = MemberSerializer(queryset, many=True)
-            member_activity_data = serializer_class.data
+        queryset = Member.objects.all()                                 # Fetch all Member Objects in DB
+        if queryset:                                                    # Check if data present in DB
+            serializer_class = MemberSerializer(queryset, many=True)    # Invoke serializer with member objects
+            # many=True because handling nested multiple records
+            member_activity_data = serializer_class.data                # Retrieve data from serializer
             content = {
-                "ok": True,
-                "members": member_activity_data
+                "ok": True,                                             # Show DB has data
+                "members": member_activity_data                         # Member data
             }
-            json.dumps(content)
-            return Response(content)
+            json.dumps(content)                                         # Creates nested JSON
+            return Response(content)                                    # Response with JSON to api call
         else:
             return Response({
-                "ok": False
+                "ok": False                                             # Show DB is empty
             })
 
